@@ -1,0 +1,253 @@
+{
+  "address": "AszSDxnpJW3GWPMuRfyQCvoJiz1U6E6fHCbVemnV9vD2",
+  "metadata": {
+    "name": "meerkat_presale_sol",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "buy_with_sol",
+      "docs": [
+        "# Behavior",
+        "Allows users to buy tokens with SOL.",
+        "The user must send the correct amount of SOL to the receiver address.",
+        "The receiver address is the treasury wallet that will receive the funds.",
+        "The user must send the correct amount of SOL to the receiver address.",
+        "The function will emit an event with the payer, receiver, eth_address, amount, and timestamp.",
+        "# Arguments",
+        "`ctx` - The context of the program.",
+        "`metadata` - Extra information with the SOL quantity.",
+        "# Errors",
+        "The function will return an error if:",
+        "- The receiver address is not valid.",
+        "- The payer account does not have enough funds."
+      ],
+      "discriminator": [
+        49,
+        57,
+        124,
+        194,
+        240,
+        20,
+        216,
+        102
+      ],
+      "accounts": [
+        {
+          "name": "meerkat_presale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  101,
+                  114,
+                  107,
+                  97,
+                  116,
+                  95,
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "receiver",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "clock",
+          "address": "SysvarC1ock11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "metadata",
+          "type": {
+            "defined": {
+              "name": "TokenParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "init_presale",
+      "docs": [
+        "# Behavior",
+        "Initializes the Meerkat presale with the owner and receiver addresses.",
+        "The owner is the address that can manage the presale, and the receiver is the address that will receive the funds.",
+        "The owner must be the trusted owner, which is a hardcoded address.",
+        "The receiver must be a valid address.",
+        "The presale can only be initialized once.",
+        "# Arguments",
+        "`ctx` - The context of the program.",
+        "# Errors",
+        "The function will return an error if:",
+        "- The owner is not the trusted owner.",
+        "- The presale is already initialized.",
+        "# Access Control",
+        "The function can only be called by the owner."
+      ],
+      "discriminator": [
+        172,
+        248,
+        47,
+        226,
+        223,
+        52,
+        94,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "meerkat_presale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  101,
+                  114,
+                  107,
+                  97,
+                  116,
+                  95,
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "receiver"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "MeerkatPresale",
+      "discriminator": [
+        43,
+        46,
+        133,
+        159,
+        236,
+        192,
+        49,
+        25
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "IncorrectReceiver",
+      "msg": "The receiver address is incorrect."
+    },
+    {
+      "code": 6001,
+      "name": "InvalidReceiverAddress",
+      "msg": "The receiver address is invalid."
+    },
+    {
+      "code": 6002,
+      "name": "InsufficientFunds",
+      "msg": "The payer account does not have enough funds."
+    },
+    {
+      "code": 6003,
+      "name": "PresaleAlreadyInitialized",
+      "msg": "Meerkat presale is already initialized."
+    },
+    {
+      "code": 6004,
+      "name": "IncorrectOwner",
+      "msg": "The owner is not the trusted owner."
+    }
+  ],
+  "types": [
+    {
+      "name": "MeerkatPresale",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "The public key of the owner, who can manage the presale."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "receiver",
+            "docs": [
+              "The public key of the receiver, who will receive the funds. It is a treasury wallet."
+            ],
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TokenParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "address_eth_account",
+            "type": "string"
+          },
+          {
+            "name": "quantity",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}
