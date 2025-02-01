@@ -14,7 +14,7 @@ export const buyWithSol = async (wallet: Wallet | null, userPublicKey: PublicKey
     preflightCommitment: 'processed',
   })
   const program = new Program(programIdl as Idl, provider)
-  const solAmount = new BN(0.04 * LAMPORTS_PER_SOL)
+  const solAmount = new BN(0.0124 * LAMPORTS_PER_SOL)
 
   const [presalePDA] = PublicKey.findProgramAddressSync([Buffer.from(SOLANA_PROGRAM_SEED)], program.programId)
 
@@ -26,6 +26,7 @@ export const buyWithSol = async (wallet: Wallet | null, userPublicKey: PublicKey
     meerkatPresale: presalePDA,
     payer: userPublicKey,
     receiver: RECEIVER,
+    priceUpdate: new PublicKey("7UVimffxr9ow1uXYxsr4LHAcV58mLzhmwaeKvJ1pjLiE"),
     systemProgram: SystemProgram.programId,
     rent: SYSVAR_RENT_PUBKEY,
     clock: SYSVAR_CLOCK_PUBKEY,
