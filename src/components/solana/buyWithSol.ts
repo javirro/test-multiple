@@ -14,7 +14,7 @@ export const buyWithSol = async (wallet: Wallet | null, userPublicKey: PublicKey
     preflightCommitment: 'processed',
   })
   const program = new Program(programIdl as Idl, provider)
-  const solAmount = new BN(0.0124 * LAMPORTS_PER_SOL)
+  const solAmount = new BN(0.0104 * LAMPORTS_PER_SOL)
 
   const [presalePDA] = PublicKey.findProgramAddressSync([Buffer.from(SOLANA_PROGRAM_SEED)], program.programId)
 

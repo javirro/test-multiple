@@ -3,6 +3,8 @@ import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapte
 import { useAnchorWallet } from '@solana/wallet-adapter-react'
 import { buyWithSol } from '../../components/solana/buyWithSol'
 import { Wallet } from '@coral-xyz/anchor'
+import ButtonsWallet from '../../components/evm/ButtonsWallet'
+
 
 function Home() {
   // const { connected, publicKey, wallet, sendTransaction } = useWallet()
@@ -20,7 +22,10 @@ function Home() {
       <div className="App">
         <WalletMultiButton />
         <WalletDisconnectButton />
-        <button onClick={() => onClick()}>Buy</button>
+        <button className="bg-gray-900 text-orange-200 p-4 border-0 rounded-md" onClick={() => onClick()}>
+          Buy with Solana
+        </button>
+        <ButtonsWallet />
       </div>
     </main>
   )

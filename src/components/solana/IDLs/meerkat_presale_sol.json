@@ -156,12 +156,124 @@
           }
         },
         {
-          "name": "owner",
+          "name": "presale_owner",
           "writable": true,
           "signer": true
         },
         {
           "name": "receiver"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "pause_presale",
+      "discriminator": [
+        100,
+        158,
+        107,
+        128,
+        173,
+        140,
+        237,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "meerkat_presale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  101,
+                  114,
+                  107,
+                  97,
+                  116,
+                  95,
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "presale_owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "meerkat_presale"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "unpause_presale",
+      "discriminator": [
+        198,
+        136,
+        204,
+        59,
+        147,
+        127,
+        167,
+        114
+      ],
+      "accounts": [
+        {
+          "name": "meerkat_presale",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  101,
+                  101,
+                  114,
+                  107,
+                  97,
+                  116,
+                  95,
+                  112,
+                  114,
+                  101,
+                  115,
+                  97,
+                  108,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "presale_owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "meerkat_presale"
+          ]
         },
         {
           "name": "system_program",
@@ -224,6 +336,16 @@
       "code": 6004,
       "name": "IncorrectOwner",
       "msg": "The owner is not the trusted owner."
+    },
+    {
+      "code": 6005,
+      "name": "PresaleAlreadyPaused",
+      "msg": "The presale is already paused."
+    },
+    {
+      "code": 6006,
+      "name": "IncorrectAccountOwner",
+      "msg": "The account owner is incorrect. The program ID is not the owner."
     }
   ],
   "types": [
@@ -233,7 +355,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "owner",
+            "name": "presale_owner",
             "docs": [
               "The public key of the owner, who can manage the presale."
             ],
@@ -245,6 +367,10 @@
               "The public key of the receiver, who will receive the funds. It is a treasury wallet."
             ],
             "type": "pubkey"
+          },
+          {
+            "name": "paused",
+            "type": "bool"
           }
         ]
       }
