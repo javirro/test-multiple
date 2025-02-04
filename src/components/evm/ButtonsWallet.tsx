@@ -16,7 +16,7 @@ const ButtonsWallet = () => {
     {
       chains, // the list of chains that web3-onboard was initialized with
       connectedChain, // the current chain the user's wallet is connected to
-      settingChain, // boolean indicating if the chain is in the process of being set
+   
     },
     setChain, // function to call to initiate user to switch chains in their wallet
   ] = useSetChain()
